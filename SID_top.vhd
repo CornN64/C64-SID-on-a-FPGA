@@ -16,7 +16,7 @@ library ieee;
 
 entity SID is
 	port (
-		RESET							: in  std_logic;	-- active high reset
+		RESET							: in  std_logic;	-- active low reset
 		OSC 							: in  std_logic;	-- main clock 40Mhz
 		Aout 							: out std_logic;	-- audio out from SD DAC
 		RX	 							: in  std_logic;	-- RS232 data to FPGA
@@ -47,7 +47,7 @@ begin
   -----------------------------------------------------------------------------
   -- Signal mapping
   -----------------------------------------------------------------------------
-	rst		<= RESET;				    -- active high reset to active high
+	rst		<= NOT RESET;				    -- create active high
     WE      <= EN AND RW;
 
   -----------------------------------------------------------------------------

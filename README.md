@@ -1,18 +1,19 @@
 ##C64 SID audio chip on a FPGA which allows to play classic SID tunes through a computers COM port.
 This SID VHDL implementation is based on source from http://papilio.gadgetfactory.net/index.php?n=Playground.C64SID. <br/>
 Adding a digital filter to emulate the analog one present on the real SID and the undocumented modes when several waveforms<br/>
-are selected for a SID voice which some sounds rely on. A 3rd order 16bit DeltaSigma DAC was added to the audio output to give<br/>
+are selected for a SID voice which some sounds rely on. A 3rd order 16bit Delta Sigma DAC was added to the audio output to give<br/>
 some nice quality audio reproduction. Some minor changes was done to the noise generator as well.<br/>
 The implementation basically takes writes to the SID register and allows to stream SID data directly to the SID through<br/>
 a 115k2 baud RS232 interface. An ACTEL A3P1500 flash FPGA was used for testing of which about 25% was occupied by the logic.<br/>
 The non pipelined multiplers used for volume and filtering uses quite a bit of logic and makes the solution "slow"<br/> 
 
 The FPGA expects a main clock of 40MHz but can be tweaked to other rates (The real SID works at 1MHz after all)<br/>
-The COM port need to run as fast as possible but 115200 baud seem to run well enough for most SIDs<br/>
-The audio pin require a simple RC filter with 1k5 resistor and 4n7 capacitor to ground to smooth out the SD modulator noise.<br/> 
+The fastest clock is for the  Delta Sigma converter to produce a clean audio up to ~20kHz<br/>
+The COM port need to run as fast as possible but 115200 baud seem to run well enough for most SIDs tunes<br/>
+The audio pin require a simple RC filter with 1k5 resistor and 4n7 capacitor to ground to smooth out the DS modulator noise.<br/> 
 Below you can see the interface signals need to make this work.<br/>
 
-NRESET	: in  std_logic;	-- active low reset<br/>
+RESET	: in  std_logic;	-- active low reset<br/>
 OSC 	: in  std_logic;	-- main clock 40Mhz<br/>
 Aout	: out std_logic;	-- audio out<br/>
 RX	    : in  std_logic;	-- RS232 data to FPGA<br/>
