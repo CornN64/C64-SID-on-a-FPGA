@@ -1,11 +1,6 @@
-##C64 SID audio chip on a FPGA which allows to play classic SID tunes through a computers COM port.
-This SID VHDL implementation is based on source from http://papilio.gadgetfactory.net/index.php?n=Playground.C64SID. <br/>
-Adding a digital filter to emulate the analog one present on the real SID and the undocumented modes when several waveforms<br/>
-are selected for a SID voice which some sounds rely on. A 3rd order 16bit Delta Sigma DAC was added to the audio output to give<br/>
-some nice quality audio reproduction. Some minor changes was done to the noise generator as well.<br/>
-The implementation basically takes writes to the SID register and allows to stream SID data directly to the SID through<br/>
-a 115k2 baud RS232 interface. An ACTEL A3P1500 flash FPGA was used for testing of which about 25% was occupied by the logic.<br/>
-The non pipelined multiplers used for volume and filtering uses quite a bit of logic and makes the solution "slow"<br/> 
+C64 SID audio chip on a FPGA which allows to play classic SID tunes through a computers COM port. This SID VHDL implementation is based on source from http://papilio.gadgetfactory.net/index.php?n=Playground.C64SID. Adding a digital filter to emulate the analog one present on the real SID and the undocumented modes when several waveforms are selected for a SID voice which some sounds rely on. A 3rd order 16bit Delta Sigma DAC was added to the audio output to give some nice quality audio reproduction. Some minor changes was done to the noise generator as well. The implementation basically takes writes to the SID register and allows to stream SID data directly to the SID through a 115k2 baud RS232 interface. An ACTEL A3P1500 flash FPGA was used for testing of which about 25% was occupied by the logic. The non pipelined multiplers used for volume and filtering uses quite a bit of logic and makes the solution "slow"<br/>
+A youtube clip can be found here of the FPGA SID playing a tune https://www.youtube.com/watch?v=a_OK4_-QRLo&t<br/>
+(Sorry fo the crappy phone recording...) 
 
 The FPGA expects a main clock of 40MHz but can be tweaked to other rates (The real SID works at 1MHz after all)<br/>
 The fastest clock is for the  Delta Sigma converter to produce a clean audio up to ~20kHz<br/>
